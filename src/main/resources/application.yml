@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  # RabbitMQ 정보
+  rabbitmq:
+    host: localhost # 나중에 공용 ip로 변경
+    port: 5672
+    username: admin
+    password: admin
+
+  # PostgreSQL 정보
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://130.162.128.153:5432/ottrank?characterEncoding=utf8
+    username: postgres
+    password: postgres
+
+# Mybatis 설정
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 소스에서 가져다 쓸 RabbitMQ 변수들
+ottrankmq:
+  route_key: ottRank
+  req_exchanges: request_e
+  req_queue: request_q
+  res_exchanges: response_e
+  res_queue: response_q
+
+property:
+  api:
+    end-point: /api
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line][%C] ==> %m%n"
+  level:
+    org:
+      springframework: DEBUG

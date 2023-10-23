@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.12'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.OTR'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.3'
+	implementation 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.67.0'
+	implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.8'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp'
+	implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.3.3'
+	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.9.1'
+	implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.2.1'
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.2'
+	implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.3.0'
+	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+	implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	annotationProcessor('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+}
+
+//configurations {
+//	compileOnly {
+//		extendsFrom annotationProcessor
+//	}
+//	all {
+//		// logback과의 충돌 방지
+//		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//	}
+//}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

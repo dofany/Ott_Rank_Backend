@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false" pattern="[%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}] %highlight{[%-3level]}{FATAL=bg_red, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=blue} %style{[%t]}{yellow} [%C] ==> %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- spring logger 설정 -->
+        <logger name="org.springframework">
+            <level value="DEBUG" />
+        </logger>
+
+        <logger name="org.springframework.web" additivity="false">
+            <level value="TRACE" />
+            <AppenderRef ref="STDOUT" />
+        </logger>
+
+        <logger name="com.OTR" additivity="false">
+            <level value="DEBUG" />
+            <AppenderRef ref="STDOUT" />
+        </logger>
+
+        <!-- 쿼리 테이블 결과 logger 설정 -->
+        <logger name="jdbc.sqltiming" additivity="false">
+            <level value="DEBUG" />
+            <AppenderRef ref="STDOUT" />
+        </logger>
+
+        <Logger name="jdbc.sqlonly" additivity="false">
+            <level value="DEBUG" />
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <logger name="org.apache.commons" additivity="false">
+            <level value="DEBUG" />
+            <appenderRef ref="STDOUT"/>
+        </logger>
+
+        <!-- 기본 logger 설정-->
+        <Root level="DEBUG">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

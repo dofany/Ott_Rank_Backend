@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.OTR.ottrank.rankbas.repository.RankBasRepository">
+
+    <select id="getRankBas" parameterType="com.OTR.ottrank.rabbitmq.dto.RabbitMqDto$Request$Message" resultType="com.OTR.ottrank.rabbitmq.dto.RabbitMqDto$Response$Message">
+        SELECT
+            title,
+            change_rank,
+            category,
+            img_src,
+            rank,
+            create_dt
+        FROM
+            rank_bas
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="category == null or category == ''">
+                AND category = '통합'
+            </if>
+        </where>
+    </select>
+
+    <delete id="rankDelete" parameterType="string">
+        DELETE FROM rank_bas WHERE category = #{category}
+    </delete>
+
+    <insert id="rankInsert" parameterType="com.OTR.ottrank.rabbitmq.dto.RabbitMqDto$Response$Message">
+        INSERT INTO rank_bas(
+            title,
+            change_rank,
+            category,
+            img_src,
+            rank,
+            create_dt
+        ) VALUES (
+            #{title},
+            #{changeRank},
+            #{category},
+            #{imgSrc},
+            #{rank},
+            NOW()
+        )
+    </insert>
+</mapper>
